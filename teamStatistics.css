@@ -2,7 +2,7 @@
   --negro: #1a1a1a;
   --amarillo: #ffd400;
   --gris-claro: #E6E8E6;
-  --gris-ganador: #C7CAC7;
+  --gris-ganador: #c4c7c4;
   --blanco: #ffffff;
 }
 
@@ -102,14 +102,11 @@ body {
   padding: 0.75rem 1rem;
   vertical-align: middle;
 }
-.tabla-estadisticas tbody tr:first-child {
-  background-color: var(--gris-ganador);
+.tabla-estadisticas tbody tr:first-child td {
+  background-color: #bfc3bf !important;
   font-weight: 700;
-}
-.tabla-estadisticas tbody tr:first-child {
-  background-color: var(--gris-ganador);
-  font-weight: 700;
-  border-left: 5px solid var(--amarillo);
+  border-top: 2px solid var(--amarillo);
+  border-bottom: 2px solid var(--amarillo);
 }
 /* Pie */
 .footer-negro {
