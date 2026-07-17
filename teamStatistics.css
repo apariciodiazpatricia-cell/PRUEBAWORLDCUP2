@@ -2,6 +2,7 @@
   --negro: #1a1a1a;
   --amarillo: #ffd400;
   --gris-claro: #E6E8E6;
+  --gris-ganador: #C7CAC7;
   --blanco: #ffffff;
 }
 
@@ -101,7 +102,15 @@ body {
   padding: 0.75rem 1rem;
   vertical-align: middle;
 }
-
+.tabla-estadisticas tbody tr:first-child {
+  background-color: var(--gris-ganador);
+  font-weight: 700;
+}
+.tabla-estadisticas tbody tr:first-child {
+  background-color: var(--gris-ganador);
+  font-weight: 700;
+  border-left: 5px solid var(--amarillo);
+}
 /* Pie */
 .footer-negro {
   background-color: var(--negro);
@@ -110,11 +119,19 @@ body {
   letter-spacing: 1px;
 }
 .bandera {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+
+    /* marco más visible */
+    border: 2px solid #1a1a1a;
+    border-radius: 3px;
+
+    /* separación del fondo */
     padding: 2px;
-    background: #fff;
-    border: 1px solid #555;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    background-color: #ffffff;
+
+    /* efecto relieve */
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
 }
