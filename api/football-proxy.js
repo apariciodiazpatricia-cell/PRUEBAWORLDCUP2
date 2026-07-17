@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `https://api.football-data.org/v4/${path}`;
+    const url = `https://api.football-data.org/v4/${decodeURIComponent(path)}`;
 
     const respuesta = await fetch(url, {
       headers: { "X-Auth-Token": process.env.FOOTBALL_API_KEY },

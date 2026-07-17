@@ -20,9 +20,9 @@
       vacía en una demo.
    ============================================================ */
 
-const API_KEY = " cbddc1d1fa024ff5ac4432cc49a57bed";
+
 const COMPETICION = "WC"; // Código de la Copa del Mundo en football-data.org
-const BASE_URL = "https://api.football-data.org/v4";
+
 const NUM_FILAS = 5; // cuántas filas mostrar en cada ranking
 
 // Datos de respaldo por si la API falla o no hay conexión
@@ -74,9 +74,10 @@ async function cargarEstadisticas() {
 /* -------------------- Llamadas a la API -------------------- */
 
 async function obtenerMaximosGoleadores() {
+  const path = `competitions/${COMPETICION}/scorers?limit=${NUM_FILAS}`;
+
   const respuesta = await fetch(
-    `${BASE_URL}/competitions/${COMPETICION}/scorers?limit=${NUM_FILAS}`,
-    { headers: { "X-Auth-Token": API_KEY } }
+    `/api/football-proxy?path=${encodeURIComponent(path)}`
   );
 
   if (!respuesta.ok) {
@@ -94,9 +95,10 @@ async function obtenerMaximosGoleadores() {
 }
 
 async function obtenerTablaClasificacion() {
+  const path = `competitions/${COMPETICION}/standings`;
+
   const respuesta = await fetch(
-    `${BASE_URL}/competitions/${COMPETICION}/standings`,
-    { headers: { "X-Auth-Token": API_KEY } }
+    `/api/football-proxy?path=${encodeURIComponent(path)}`
   );
 
   if (!respuesta.ok) {
@@ -105,8 +107,6 @@ async function obtenerTablaClasificacion() {
 
   const datos = await respuesta.json();
 
-  // La Copa del Mundo se organiza por grupos, así que juntamos
-  // todos los equipos de todos los grupos en una sola lista.
   const equipos = [];
   datos.standings.forEach((grupo) => {
     grupo.table.forEach((fila) => {
