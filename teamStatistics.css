@@ -1,0 +1,93 @@
+:root {
+  --negro: #1a1a1a;
+  --amarillo: #ffd400;
+  --gris-claro: #e0e0e0;
+  --blanco: #ffffff;
+}
+
+body {
+  background-color: #2b2b2b;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: var(--blanco);
+}
+
+/* Cabecera */
+.header-negro {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+.header-negro h1 {
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* Navegación */
+.nav-amarilla {
+  background-color: var(--amarillo);
+}
+
+.nav-amarilla .nav-link {
+  color: var(--negro);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.6rem 1rem;
+}
+
+.nav-amarilla .nav-link.active,
+.nav-amarilla .nav-link:hover {
+  background-color: var(--negro);
+  color: var(--amarillo);
+}
+
+/* Título de sección */
+.titulo-seccion {
+  color: var(--blanco);
+}
+
+.subtitulo {
+  color: var(--amarillo);
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Tabla de estadísticas */
+.tabla-estadisticas {
+  background-color: var(--blanco);
+  color: var(--negro);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tabla-estadisticas thead {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+.tabla-estadisticas thead th {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.tabla-estadisticas tbody tr:nth-child(odd) {
+  background-color: var(--amarillo);
+}
+
+.tabla-estadisticas tbody tr:nth-child(even) {
+  background-color: var(--gris-claro);
+}
+
+.tabla-estadisticas td,
+.tabla-estadisticas th {
+  padding: 0.6rem 1rem;
+  vertical-align: middle;
+}
+
+/* Pie */
+.footer-negro {
+  background-color: var(--negro);
+  color: var(--amarillo);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
