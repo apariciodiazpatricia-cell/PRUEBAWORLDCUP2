@@ -86,12 +86,13 @@ async function obtenerMaximosGoleadores() {
 
   const datos = await respuesta.json();
 
-  return datos.scorers.map((item, indice) => ({
-    posicion: indice + 1,
-    nombre: item.player.name,
-    equipo: item.team.name,
-    goles: item.goals,
-  }));
+return datos.scorers.map((item, indice) => ({
+  posicion: indice + 1,
+  nombre: item.player.name,
+  equipo: item.team.name,
+  escudo: item.team.crest,
+  goles: item.goals,
+}));
 }
 
 async function obtenerTablaClasificacion() {
@@ -111,13 +112,13 @@ async function obtenerTablaClasificacion() {
   datos.standings.forEach((grupo) => {
     grupo.table.forEach((fila) => {
       equipos.push({
-        equipo: fila.team.name,
-        golesFavor: fila.goalsFor,
-        golesContra: fila.goalsAgainst,
-      });
-    });
-  });
-
+  equipo: fila.team.name,
+  escudo: fila.team.crest,
+  golesFavor: fila.goalsFor,
+  golesContra: fila.goalsAgainst,
+});
+});
+});
   return equipos;
 }
 
@@ -131,7 +132,14 @@ function pintarGoleadores(lista) {
       <tr>
         <td>${fila.posicion}</td>
         <td>${fila.nombre}</td>
-        <td>${fila.equipo}</td>
+        <td>
+  <img src="${fila.escudo}"
+       alt="${fila.equipo}"
+       width="24"
+       height="24"
+       style="margin-right:8px; vertical-align:middle;">
+  ${fila.equipo}
+</td>
         <td>${fila.goles}</td>
       </tr>`
     )
@@ -149,7 +157,14 @@ function pintarEquiposGoleadores(equipos) {
       (fila, indice) => `
       <tr>
         <td>${indice + 1}</td>
-        <td>${fila.equipo}</td>
+        <td>
+  <img src="${fila.escudo}"
+       alt="${fila.equipo}"
+       width="24"
+       height="24"
+       style="margin-right:8px; vertical-align:middle;">
+  ${fila.equipo}
+</td>
         <td>${fila.golesFavor}</td>
       </tr>`
     )
@@ -167,7 +182,14 @@ function pintarEquiposEncajados(equipos) {
       (fila, indice) => `
       <tr>
         <td>${indice + 1}</td>
-        <td>${fila.equipo}</td>
+        <td>
+  <img src="${fila.escudo}"
+       alt="${fila.equipo}"
+       width="24"
+       height="24"
+       style="margin-right:8px; vertical-align:middle;">
+  ${fila.equipo}
+</td>
         <td>${fila.golesContra}</td>
       </tr>`
     )
