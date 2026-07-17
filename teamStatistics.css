@@ -112,11 +112,9 @@ body {
 .bandera {
     width: 24px;
     height: 24px;
-    margin-right: 8px;
-    vertical-align: middle;
-    border: 1px solid #444;
-    border-radius: 4px;
+    padding: 2px;
     background: #fff;
-    padding: 1px;
-    object-fit: cover;
+    border: 1px solid #555;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.35);
 }
