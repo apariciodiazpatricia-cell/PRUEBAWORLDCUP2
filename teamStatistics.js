@@ -133,11 +133,9 @@ function pintarGoleadores(lista) {
         <td>${fila.posicion}</td>
         <td>${fila.nombre}</td>
         <td>
-  <img src="${fila.escudo}"
-       alt="${fila.equipo}"
-       width="24"
-       height="24"
-       style="margin-right:8px; vertical-align:middle;">
+  <img class="bandera"
+       src="${fila.escudo}"
+       alt="${fila.equipo}">
   ${fila.equipo}
 </td>
         <td>${fila.goles}</td>
@@ -158,11 +156,9 @@ function pintarEquiposGoleadores(equipos) {
       <tr>
         <td>${indice + 1}</td>
         <td>
-  <img src="${fila.escudo}"
-       alt="${fila.equipo}"
-       width="24"
-       height="24"
-       style="margin-right:8px; vertical-align:middle;">
+  <img class="bandera"
+       src="${fila.escudo}"
+       alt="${fila.equipo}">
   ${fila.equipo}
 </td>
         <td>${fila.golesFavor}</td>
@@ -183,11 +179,9 @@ function pintarEquiposEncajados(equipos) {
       <tr>
         <td>${indice + 1}</td>
         <td>
-  <img src="${fila.escudo}"
-       alt="${fila.equipo}"
-       width="24"
-       height="24"
-       style="margin-right:8px; vertical-align:middle;">
+  <img class="bandera"
+       src="${fila.escudo}"
+       alt="${fila.equipo}">
   ${fila.equipo}
 </td>
         <td>${fila.golesContra}</td>
