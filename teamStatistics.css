@@ -74,11 +74,11 @@ body {
   border-bottom: 3px solid var(--amarillo);
 }
 
-.tabla-estadisticas tbody tr:nth-child(odd) {
+.tabla-estadisticas tbody tr:nth-child(odd) td {
   background-color: #E6E8E6;
 }
 
-.tabla-estadisticas tbody tr:nth-child(even) {
+.tabla-estadisticas tbody tr:nth-child(even) td {
   background-color: #DCDDDB;
 }
 
@@ -102,9 +102,13 @@ body {
   padding: 0.75rem 1rem;
   vertical-align: middle;
 }
+.tabla-estadisticas tbody tr:first-child,
 .tabla-estadisticas tbody tr:first-child td {
   background-color: #bfc3bf !important;
   font-weight: 700;
+}
+
+.tabla-estadisticas tbody tr:first-child td {
   border-top: 2px solid var(--amarillo);
   border-bottom: 2px solid var(--amarillo);
 }
@@ -131,4 +135,8 @@ body {
 
     /* efecto relieve */
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+.tabla-estadisticas tbody tr:first-child td {
+  background-color: #b7bbb7 !important;
+  color: #1a1a1a;
 }
