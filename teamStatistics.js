@@ -23,7 +23,7 @@
 
 const COMPETICION = "WC"; // Código de la Copa del Mundo en football-data.org
 
-const NUM_FILAS = 5; // cuántas filas mostrar en cada ranking
+const NUM_FILAS = 10; // cuántas filas mostrar en cada ranking
 
 // Datos de respaldo por si la API falla o no hay conexión
 const DATOS_EJEMPLO = {
