@@ -62,3 +62,53 @@ Espero que quien visite este repositorio no solo vea el resultado final de cada 
 Gracias por dedicar unos minutos a visitar mi trabajo.
 
 Si has llegado hasta aquí, espero que disfrutes viendo mi evolución tanto como yo estoy disfrutando del proceso de aprender y seguir creciendo como desarrolladora.
+
+## 🔴📢NOTA TÉCNICA DE INVESTIGACIÓN DURANTE EL PROCESO
+
+## ⚠️ ATENCIÓN — Fix: cálculo incorrecto de "Goles a favor / en contra" por equipo
+
+**Fecha:** Julio 2026
+**Archivo afectado:** `js/teamStatistics.js`
+**Función afectada:** `obtenerTablaClasificacion()`
+
+### El problema
+
+La tabla "Equipos Más Goleadores" (y "Equipos con Más Goles Encajados") mostraba
+números que no coincidían con la realidad del torneo. Por ejemplo, varias
+selecciones aparecían empatadas a los mismos goles aunque en la vida real unas
+hubieran anotado bastantes más en fases posteriores del Mundial.
+
+### La causa
+
+La función original pedía los datos al endpoint `/competitions/{id}/standings`
+de la API de football-data.org. Este endpoint solo devuelve la clasificación
+de la **fase de grupos** (partidos agrupados por grupo: A, B, C...). En cuanto
+un equipo pasa a eliminatorias (octavos, cuartos, semis, final), esos partidos
+ya no pertenecen a ningún grupo, así que la API deja de sumarlos en el
+`standings`. Resultado: los goles de un equipo se quedaban "congelados" en el
+total de sus 3 partidos de grupo, sin importar cuántos goles metiera después.
+
+### La solución
+
+Se sustituyó la llamada a `/standings` por una llamada a
+`/competitions/{id}/matches`, que devuelve **todos** los partidos del torneo
+(grupos + eliminatorias). La nueva función:
+
+1. Filtra solo los partidos con `status === "FINISHED"`.
+2. Recorre cada partido y suma los goles al equipo local y al visitante por
+   igual (a favor y en contra).
+3. Acumula los totales en un objeto usando el nombre del equipo como clave,
+   para evitar duplicados.
+4. Devuelve el resultado como array (`Object.values(...)`) para no romper el
+   resto del código que ya esperaba ese formato.
+
+### Lección para quien consulte esto
+
+Al integrar una API de datos deportivos (o cualquier API con conceptos de
+"temporada"/"fase"), **revisa siempre qué cubre exactamente cada endpoint**
+antes de usarlo para un cálculo acumulado. Un endpoint de "clasificación" no
+siempre incluye el torneo completo — puede estar limitado a una sub-fase
+(grupo, liga regular, etc.). Cuando necesites un total real de principio a
+fin, casi siempre es más fiable **calcularlo tú misma recorriendo los
+partidos individuales**, en vez de confiar en un resumen ya calculado por la
+API.
