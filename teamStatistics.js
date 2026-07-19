@@ -96,30 +96,43 @@ return datos.scorers.map((item, indice) => ({
 }
 
 async function obtenerTablaClasificacion() {
-  const path = `competitions/${COMPETICION}/standings`;
+  const path = `competitions/${COMPETICION}/matches`;
 
   const respuesta = await fetch(
     `/api/football-proxy?path=${encodeURIComponent(path)}`
   );
 
   if (!respuesta.ok) {
-    throw new Error(`Error ${respuesta.status} al pedir clasificación`);
+    throw new Error(`Error ${respuesta.status} al pedir partidos`);
   }
 
   const datos = await respuesta.json();
 
-  const equipos = [];
-  datos.standings.forEach((grupo) => {
-    grupo.table.forEach((fila) => {
-      equipos.push({
-  equipo: fila.team.name,
-  escudo: fila.team.crest,
-  golesFavor: fila.goalsFor,
-  golesContra: fila.goalsAgainst,
-});
-});
-});
-  return equipos;
+  const golesPorEquipo = {}; // acumulador: { "Germany": { golesFavor, golesContra, escudo } }
+
+  datos.matches
+    .filter((partido) => partido.status === "FINISHED")
+    .forEach((partido) => {
+      const local = partido.homeTeam;
+      const visitante = partido.awayTeam;
+      const golesLocal = partido.score.fullTime.home;
+      const golesVisitante = partido.score.fullTime.away;
+
+      if (!golesPorEquipo[local.name]) {
+        golesPorEquipo[local.name] = { equipo: local.name, escudo: local.crest, golesFavor: 0, golesContra: 0 };
+      }
+      if (!golesPorEquipo[visitante.name]) {
+        golesPorEquipo[visitante.name] = { equipo: visitante.name, escudo: visitante.crest, golesFavor: 0, golesContra: 0 };
+      }
+
+      golesPorEquipo[local.name].golesFavor += golesLocal;
+      golesPorEquipo[local.name].golesContra += golesVisitante;
+
+      golesPorEquipo[visitante.name].golesFavor += golesVisitante;
+      golesPorEquipo[visitante.name].golesContra += golesLocal;
+    });
+
+  return Object.values(golesPorEquipo);
 }
 
 /* -------------------- Pintado en el DOM -------------------- */
